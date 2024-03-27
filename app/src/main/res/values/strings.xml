@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">Store Management</string>
+    <string-array name="country_codes">
+        <item>+91 India</item>    <!-- India -->
+        <item>+1 United States</item>    <!-- United States -->
+        <item>+44 United Kingdom</item>   <!-- United Kingdom -->
+        <item>+33 France</item>   <!-- France -->
+        <item>+49 Germany</item>   <!-- Germany -->
+        <item>+81 Japan</item>   <!-- Japan -->
+        <item>+61 Australia</item>   <!-- Australia -->
+        <item>+86 China</item>   <!-- China -->
+        <item>+52 Mexico</item>   <!-- Mexico -->
+        <item>+7 Russia</item>    <!-- Russia -->
+        <item>+213 Algeria</item>  <!-- Algeria -->
+        <item>+54 Argentina</item>   <!-- Argentina -->
+        <item>+591 Bolivia</item>  <!-- Bolivia -->
+        <item>+55 Brazil</item>   <!-- Brazil -->
+        <item>+1 Canada</item>    <!-- Canada -->
+        <item>+357 Cyprus</item>  <!-- Cyprus -->
+        <item>+420 Czech Republic</item>  <!-- Czech Republic -->
+        <item>+45 Denmark</item>   <!-- Denmark -->
+        <item>+20 Egypt</item>   <!-- Egypt -->
+        <item>+358 Finland</item>
+        <item>+212 Morocco</item>  <!-- Morocco -->
+        <item>+258 Mozambique</item>  <!-- Mozambique -->
+        <item>+95 Myanmar</item>   <!-- Myanmar -->
+        <item>+264 Namibia</item>   <!-- Namibia -->
+        <item>+674 Nauru</item>   <!-- Nauru -->
+        <item>+977 Nepal</item>  <!-- Nepal -->
+        <item>+31 Netherlands</item>   <!-- Netherlands -->
+        <item>+599 Netherlands Antilles</item>  <!-- Netherlands Antilles -->
+        <item>+687 New Caledonia</item>  <!-- New Caledonia -->
+        <item>+64 New Zealand</item>   <!-- New Zealand -->
+        <item>+505 Nicaragua</item>  <!-- Nicaragua -->
+        <item>+227 Niger</item>   <!-- Niger -->
+        <item>+234 Nigeria</item>  <!-- Nigeria -->
+        <item>+683 Niue</item>   <!-- Niue -->
+        <item>+672 Norfolk Island</item>  <!-- Norfolk Island -->
+        <item>+850 North Korea</item>   <!-- North Korea -->
+        <item>+47 Norway</item>   <!-- Norway -->
+        <item>+968 Oman</item>  <!-- Oman -->
+        <item>+92 Pakistan</item>   <!-- Pakistan -->
+        <item>+680 Palau</item>   <!-- Palau -->
+        <item>+970 Palestinian Territory</item>  <!-- Palestinian Territory -->
+        <item>+507 Panama</item>   <!-- Panama -->
+        <item>+675 Papua New Guinea</item>  <!-- Papua New Guinea -->
+        <item>+595 Paraguay</item>  <!-- Paraguay -->
+        <item>+51 Peru</item>   <!-- Peru -->
+        <item>+63 Philippines</item>  <!-- Philippines -->
+        <item>+48 Poland</item>   <!-- Poland -->
+        <item>+351 Portugal</item>  <!-- Portugal -->
+        <item>+974 Qatar</item>  <!-- Qatar -->
+        <item>+40 Romania</item>   <!-- Romania -->
+        <item>+7 Russia</item>    <!-- Russia -->
+        <item>+250 Rwanda</item>  <!-- Rwanda -->
+        <item>+590 Saint Barthélemy</item>  <!-- Saint Barthélemy -->
+        <item>+685 Samoa</item>   <!-- Samoa -->
+        <item>+378 San Marino</item>  <!-- San Marino -->
+        <item>+966 Saudi Arabia</item>   <!-- Saudi Arabia -->
+        <item>+221 Senegal</item>  <!-- Senegal -->
+        <item>+381 Serbia</item>  <!-- Serbia -->
+        <item>+248 Seychelles</item>   <!-- Seychelles -->
+        <item>+232 Sierra Leone</item>   <!-- Sierra Leone -->
+        <item>+65 Singapore</item>   <!-- Singapore -->
+        <item>+421 Slovakia</item>  <!-- Slovakia -->
+        <item>+386 Slovenia</item>   <!-- Slovenia -->
+        <item>+677 Solomon Islands</item>  <!-- Solomon Islands -->
+        <item>+27 South Africa</item>   <!-- South Africa -->
+        <item>+82 South Korea</item>   <!-- South Korea -->
+        <item>+211 South Sudan</item>  <!-- South Sudan -->
+        <item>+34 Spain</item>   <!-- Spain -->
+        <item>+94 Sri Lanka</item>   <!-- Sri Lanka -->
+        <item>+290 Saint Helena</item>  <!-- Saint Helena -->
+        <item>+508 Saint Pierre and Miquelon</item>  <!-- Saint Pierre and Miquelon -->
+        <item>+249 Sudan</item>  <!-- Sudan -->
+        <item>+597 Suriname</item>   <!-- Suriname -->
+        <item>+268 Eswatini</item>  <!-- Eswatini -->
+        <item>+46 Sweden</item>   <!-- Sweden -->
+        <item>+41 Switzerland</item>   <!-- Switzerland -->
+        <item>+963 Syria</item>  <!-- Syria -->
+        <item>+886 Taiwan</item>   <!-- Taiwan -->
+        <item>+992 Tajikistan</item>   <!-- Tajikistan -->
+        <item>+255 Tanzania</item>  <!-- Tanzania -->
+        <item>+66 Thailand</item>   <!-- Thailand -->
+        <item>+228 Togo</item>   <!-- Togo -->
+        <item>+690 Tokelau</item>   <!-- Tokelau -->
+        <item>+676 Tonga</item>  <!-- Tonga -->
+        <item>+216 Tunisia</item>   <!-- Tunisia -->
+        <item>+90 Turkey</item>   <!-- Turkey -->
+        <item>+993 Turkmenistan</item>  <!-- Turkmenistan -->
+        <item>+688 Tuvalu</item>  <!-- Tuvalu -->
+        <item>+256 Uganda</item>   <!-- Uganda -->
+        <item>+380 Ukraine</item>   <!-- Ukraine -->
+        <item>+971 United Arab Emirates</item>  <!-- United Arab Emirates -->
+        <item>+44 United Kingdom</item>   <!-- United Kingdom -->
+        <item>+1 United States</item>    <!-- United States -->
+        <item>+598 Uruguay</item>  <!-- Uruguay -->
+        <item>+998 Uzbekistan</item>  <!-- Uzbekistan -->
+        <item>+678 Vanuatu</item>   <!-- Vanuatu -->
+        <item>+58 Venezuela</item>   <!-- Venezuela -->
+        <item>+84 Vietnam</item>   <!-- Vietnam -->
+        <item>+681 Wallis and Futuna</item>  <!-- Wallis and Futuna -->
+        <item>+967 Yemen</item>   <!-- Yemen -->
+        <item>+260 Zambia</item>   <!-- Zambia -->
+        <item>+263 Zimbabwe</item>  <!-- Zimbabwe -->
+        <!-- Add more country codes here -->
+    </string-array>
+</resources>
