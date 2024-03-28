@@ -33,7 +33,10 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -45,7 +48,6 @@ public class LoginPage extends AppCompatActivity {
     private View EnterPhone,Enterotp;
     private LottieAnimationView loadingAnimation;
     private String phoneNumber, verificationId;
-
     Spinner countrySpinner ;
 
     @Override
@@ -68,15 +70,15 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
 //                phoneNumber = countrySpinner.getSelectedItem().toString().split("\\s+")[0] + etPhoneNumber.getText().toString().trim();
                 phoneNumber = etPhoneNumber.getText().toString().trim();
-                if (etPhoneNumber.getText().toString().length()!=10) {
-                    FancyToast.makeText(LoginPage.this,"Please Enter a Valid Phone Number",FancyToast.LENGTH_LONG,FancyToast.WARNING,true).show();
-                } else {
+//                if (etPhoneNumber.getText().toString().length()!=10) {
+//                    FancyToast.makeText(LoginPage.this,"Please Enter a Valid Phone Number",FancyToast.LENGTH_LONG,FancyToast.WARNING,true).show();
+//                } else {
                     LoginPage.this.verificationId = verificationId;
                     loadingAnimation.setVisibility(View.GONE);
                     EnterPhone.setVisibility(View.GONE);
                     Enterotp.setVisibility(View.VISIBLE);
                     FancyToast.makeText(LoginPage.this,"OTP SENT",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true).show();
-                }
+//                }
             }
         });
 
@@ -95,48 +97,21 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private void verifyPassword(String password,String mobile) {
-        Log.d("mobile",mobile);
+    private void verifyPassword(String password,String email) {
+        Log.d("mobile",email);
         Log.d("password",password);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("credential").child(mobile);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        //check if the email and password match from the firebase authentication if yes go to the next activity else show a toast message
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // node with mobile number exists
-                    String storedPassword = dataSnapshot.getValue(String.class);
-                    Log.d("Password",storedPassword);
-                    if (password.equals(storedPassword)) {
-                        // password is correct, navigate to MainActivity
-                        // write on config.properties file to save the creadential of the user .
-                        Properties properties = new Properties();
-                        try {
-                            properties.load(getBaseContext().getAssets().open("config.properties"));
-                            properties.setProperty("Login.Status","true");
-                            properties.setProperty("Login.Mobile",mobile);
-                            properties.setProperty("Login.Password",password);
-                            properties.store(getBaseContext().openFileOutput("config.properties",MODE_PRIVATE),null);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch ( IOException e) {
-                            e.printStackTrace();
-                        }
-                        Intent intent = new Intent(LoginPage.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        // password is incorrect, show toast message
-                        FancyToast.makeText(LoginPage.this,"Invalid Password",FancyToast.LENGTH_LONG,FancyToast.WARNING,true).show();
-                    }
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    //check the config.properties file if the variable named Login.Status is false go to LoginPage.java else go to MainActivity.java
+                    Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
-                    // node with mobile number does not exist, show toast message
-                    FancyToast.makeText(LoginPage.this,"No User Found",FancyToast.LENGTH_LONG,FancyToast.WARNING,true).show();
+                    FancyToast.makeText(LoginPage.this,"Invalid OTP",FancyToast.LENGTH_LONG,FancyToast.ERROR,true).show();
                 }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // handle error
             }
         });
     }

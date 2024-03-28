@@ -6,12 +6,20 @@
     android:orientation="vertical"
     tools:context=".ScanBarCode">
 
-    <SurfaceView
-        android:id="@+id/camera_preview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
-        android:layout_weight="4"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:background="@drawable/custom_textedit_gray"
+        android:orientation="vertical">
+
+        <SurfaceView
+            android:id="@+id/camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="20dp"
+            android:layout_weight="4" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

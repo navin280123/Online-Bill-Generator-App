@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.widget.Button;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    private Button ScanBarCode,AddProduct,ViewProductList,ViewBillHistroy;
+    private Button ScanBarCode,AddProduct,ViewProductList,ViewBillHistroy,logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         AddProduct = findViewById(R.id.add_product);
         ViewProductList = findViewById(R.id.product_list);
         ViewBillHistroy = findViewById(R.id.bill_history);
+        logout = findViewById(R.id.logoutuser);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String user = mAuth.getCurrentUser().getEmail();
+        Log.d("user", "onCreate: " + user);
         //create addactionlistner for each button to start a new activity
         ScanBarCode.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ScanBarCode.class);
@@ -33,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         });
         ViewBillHistroy.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ViewBillHistroy.class);
+            startActivity(intent);
+        });
+        logout.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, LoginPage.class);
             startActivity(intent);
         });
     }

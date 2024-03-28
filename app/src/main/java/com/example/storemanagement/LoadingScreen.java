@@ -34,29 +34,22 @@ public class LoadingScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                    //check the config.properties file if the variable named Login.Status is false go to LoginPage.java else go to MainActivity.java
-                    Properties properties = new Properties();
-                    try {
-                        properties.load(getBaseContext().getAssets().open("config.properties"));
-                        Log.d("Login.Status", properties.getProperty("Login.Status"));
-                        if (properties.getProperty("Login.Status").equals("false")) {
-                            Log.d("true", properties.getProperty("Login.Status"));
-                            Intent intent = new Intent(LoadingScreen.this, LoginPage.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Intent intent = new Intent(LoadingScreen.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch ( IOException e) {
-                        e.printStackTrace();
+                    //check if the application is already login in with the help of get userID if exist jump to main activity elase to the login page
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    Log.d("user", "onCreate: " + user);
+                    if (user != null) {
+                        Intent intent = new Intent(LoadingScreen.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
-//                    Intent intent = new Intent(LoadingScreen.this, LoginPage.class);
-//                    startActivity(intent);
-//                    finish();
+                    else{
+                        Intent intent = new Intent(LoadingScreen.this, LoginPage.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+
             }
 
         }, SPLASH_DELAY);
