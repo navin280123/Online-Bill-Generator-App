@@ -7,38 +7,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    private Button ScanBarCode,AddProduct,ViewProductList,ViewBillHistroy,logout;
+    private ImageView ScanBarCode,EnterCode;
+    Button logout;
+    private TextView scan,code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ScanBarCode = findViewById(R.id.scan_barcode);
-        AddProduct = findViewById(R.id.add_product);
-        ViewProductList = findViewById(R.id.product_list);
-        ViewBillHistroy = findViewById(R.id.bill_history);
         logout = findViewById(R.id.logoutuser);
+        ScanBarCode = findViewById(R.id.scanimg);
+        EnterCode = findViewById(R.id.pinimg);
+        code = findViewById(R.id.pin);
+        scan = findViewById(R.id.scan);
+
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String user = mAuth.getCurrentUser().getEmail();
         Log.d("user", "onCreate: " + user);
         //create addactionlistner for each button to start a new activity
         ScanBarCode.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ScanBarCode.class);
+            Intent intent = new Intent(MainActivity.this, ScanCode.class);
             startActivity(intent);
         });
-        AddProduct.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AddProduct.class);
+        scan.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ScanCode.class);
             startActivity(intent);
         });
-        ViewProductList.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ViewProductList.class);
+        EnterCode.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Enter_Pin.class);
             startActivity(intent);
         });
-        ViewBillHistroy.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ViewBillHistroy.class);
+        code.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Enter_Pin.class);
             startActivity(intent);
         });
         logout.setOnClickListener(v -> {

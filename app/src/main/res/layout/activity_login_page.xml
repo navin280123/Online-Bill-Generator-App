@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LOGIN YOUR MOBILE NUMBER"
+            android:text="ENTER YOUR EMAIL"
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:text="Enter Phone Number"
+            android:text="Email"
             android:textColor="@color/white"
             android:textSize="23dp" />
 
@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginTop="16dp"
-            android:text="Generate OTP"
+            android:text="Next"
             android:textColor="#FFFFFF" />
 
 
@@ -106,10 +106,11 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LOGIN YOUR MOBILE NUMBER"
+            android:text="ENTER YOUR PASSWORD"
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -119,20 +120,21 @@
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="23dp"
             android:paddingLeft="10dp"
+            android:text="Enter Password"
             android:textColor="@color/white"
-            android:text="Enter OTP"/>
+            android:textSize="23dp" />
 
         <EditText
             android:id="@+id/etOTP"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:background="@drawable/custom_textedit_gray"
-            android:inputType="text"
+            android:inputType="text|textPassword"
             android:paddingLeft="20dp"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -150,7 +152,7 @@
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginTop="16dp"
-            android:text="Verify OTP"
+            android:text="Log In"
             android:textColor="#FFFFFF"
             android:visibility="visible" />
 

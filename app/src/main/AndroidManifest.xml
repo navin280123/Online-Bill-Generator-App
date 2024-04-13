@@ -24,6 +24,15 @@
         android:theme="@style/Theme.StoreManagement"
         tools:targetApi="31">
         <activity
+            android:name=".Enter_Pin"
+            android:exported="false" />
+        <activity
+            android:name=".AddProduct"
+            android:exported="false" />
+        <activity
+            android:name=".ScanCode"
+            android:exported="false" />
+        <activity
             android:name=".LoginPage"
             android:exported="false" />
         <activity
@@ -31,9 +40,6 @@
             android:exported="false" />
         <activity
             android:name=".ViewProductList"
-            android:exported="false" />
-        <activity
-            android:name=".AddProduct"
             android:exported="false" />
         <activity
             android:name=".ScanBarCode"

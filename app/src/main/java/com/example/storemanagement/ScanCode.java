@@ -1,6 +1,7 @@
 package com.example.storemanagement;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -22,8 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.storemanagement.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.PlanarYUVLuminanceSource;
@@ -31,58 +36,27 @@ import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ScanBarCode extends AppCompatActivity implements SurfaceHolder.Callback, Camera.PreviewCallback {
+public class ScanCode extends AppCompatActivity implements SurfaceHolder.Callback, Camera.PreviewCallback {
 
-    private static final String TAG = ScanBarCode.class.getSimpleName();
+    private static final String TAG = ScanCode.class.getSimpleName();
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
     private DatabaseReference productsRef;
     private Camera camera;
     private SurfaceView surfaceView;
-    private RecyclerView.Adapter<MyViewHolder> adapter;
     private SurfaceHolder surfaceHolder;
     private Vibrator vibrator;
-    private RecyclerView recyclerView;
-    private List<String> barcodes;
+
     private boolean isCameraPermissionGranted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_bar_code);
+        setContentView(R.layout.activity_scan_code);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        recyclerView = findViewById(R.id.recycler_view);
-        barcodes = new ArrayList<>();
 
-        // Initialize RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the adapter and assign it to the RecyclerView
-        adapter = new RecyclerView.Adapter<MyViewHolder>() {
-            @NonNull
-            @Override
-            public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-                return new MyViewHolder(view);
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-                String item = barcodes.get(position);
-                holder.bind(item);
-            }
-
-            @Override
-            public int getItemCount() {
-                return barcodes.size();
-            }
-        };
-
-        recyclerView.setAdapter(adapter);
 
         surfaceView = findViewById(R.id.camera_preview);
         surfaceHolder = surfaceView.getHolder();
@@ -177,41 +151,53 @@ public class ScanBarCode extends AppCompatActivity implements SurfaceHolder.Call
             if (result != null) {
                 String barcodeText = result.getText();
                 Log.d("Barcode", "Barcode detected: " + barcodeText);
-                // Vibrate to provide feedback
-                if (!barcodes.contains(barcodeText)) {
-                    vibrator.vibrate(100);
-                    productsRef = FirebaseDatabase.getInstance().getReference().child("7004394490").child("product");
-                    productsRef.child(barcodeText).get().addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            String name = task.getResult().child("name").getValue().toString();
-                            String price = task.getResult().child("price").getValue().toString();
-                            String expiry = task.getResult().child("expiry").getValue().toString();
-                            String barcode = task.getResult().child("barcode").getValue().toString();
-                            barcodes.add(name + "     " +price);
-                            adapter.notifyItemInserted(barcodes.size() - 1);
-                        } else {
-                            Log.d("Barcode", "Error getting data: ", task.getException());
-                        }
-                    });
-                }
+                vibrator.vibrate(100);
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                String user = mAuth.getCurrentUser().getEmail();
+                processUser(user,barcodeText);
             }
         } catch (Exception e) {
             Log.d("NO barcode", "No Barcode detected: ");
             // No barcode found in the frame, ignore
         }
     }
+    public void processUser(String userEmail,String Billno) {
+        // 1. Get the email of the user
+        String email = userEmail;
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference emailAndPhoneNode = database.child("EmailAndPhone");
+        emailAndPhoneNode.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String userPhone;
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    if(childSnapshot.getValue().equals(email)){
+                        Log.d("Email", "Email found in database.");
+                        userPhone = childSnapshot.getKey();
+                        DatabaseReference billsNode = database.child(userPhone).child("Bills");
+                        Log.d("Test",userPhone);
+                        Log.d("Test",Billno);
+                        Log.d("Test",billsNode.toString());
+
+                        String finalUserPhone = userPhone;
+                        Intent intent = new Intent(ScanCode.this, AddProduct.class);
+                        intent.putExtra("billNumber", Billno);
+                        intent.putExtra("ID", finalUserPhone);
+                        startActivity(intent);
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+    }
+
 
     // View Holder
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
 
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textView = itemView.findViewById(R.id.textView);
-        }
-
-        public void bind(String item) {
-            textView.setText(item);
-        }
-    }
 }

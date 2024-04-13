@@ -1,67 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
-<!--    //add 4 button with different color with label Scan BarCode , Add Product, Bill Histroy and Product List.-->
+    <!--    //add 4 button with different color with label Scan BarCode , Add Product, Bill Histroy and Product List.-->
 
-    <Button
-        android:id="@+id/scan_barcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_200"
-        android:text="Scan BarCode"
-        app:layout_constraintBottom_toTopOf="@+id/add_product"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/add_product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_500"
-        android:text="Add Product"
-        app:layout_constraintBottom_toTopOf="@+id/bill_history"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scan_barcode" />
+        <ImageView
+            android:id="@+id/scanimg"
+            android:layout_width="match_parent"
+            android:layout_height="261dp"
+            android:padding="20dp"
+            app:srcCompat="@drawable/qr" />
 
-    <Button
-        android:id="@+id/bill_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_700"
-        android:text="Bill History"
-        app:layout_constraintBottom_toTopOf="@+id/product_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_product" />
+        <TextView
+            android:id="@+id/scan"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:background="@drawable/custom_textedit_gray"
+            android:gravity="center"
+            android:text="SCAN" />
 
-    <Button
-        android:id="@+id/product_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_200"
-        android:text="Product List"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bill_history" />
+        <ImageView
+            android:id="@+id/pinimg"
+            android:layout_width="match_parent"
+            android:layout_height="243dp"
+            android:padding="25dp"
+            app:srcCompat="@drawable/code" />
 
-    <Button
-        android:id="@+id/logoutuser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_list" />
+        <TextView
+            android:id="@+id/pin"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@drawable/custom_textedit_gray"
+            android:gravity="center"
+            android:text="PIN" />
+
+        <Button
+            android:id="@+id/logoutuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Logout" />
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
